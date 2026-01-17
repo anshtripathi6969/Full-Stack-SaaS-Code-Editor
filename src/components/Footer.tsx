@@ -1,8 +1,14 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+
 import { Blocks } from "lucide-react";
 
 function Footer() {
+  const pathname = usePathname();
+
+  if (pathname === "/") return null;
+
   return (
     <footer className="relative border-t border-gray-800/50 mt-auto">
       <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-gray-900 to-transparent" />
