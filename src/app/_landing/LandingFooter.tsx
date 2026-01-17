@@ -1,9 +1,8 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { Blocks, Github, Twitter, Linkedin } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+
 
 export default function LandingFooter() {
     return (
