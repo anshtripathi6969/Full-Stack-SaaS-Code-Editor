@@ -10,11 +10,9 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.20.2",
-    "@gsap/react": "^2.1.2",
     "@monaco-editor/react": "^4.7.0",
     "convex": "^1.24.8",
     "framer-motion": "^12.16.0",
-    "gsap": "^3.14.2",
     "lenis": "^1.3.17",
     "lucide-react": "^0.513.0",
     "next": "15.3.8",
