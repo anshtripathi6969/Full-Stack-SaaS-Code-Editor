@@ -1,7 +1,6 @@
 import { CodeEditorState } from "./../types/index";
 import { LANGUAGE_CONFIG } from "@/app/editor/_constants";
 import { create } from "zustand";
-import { Monaco } from "@monaco-editor/react";
 
 const getInitialState = () => {
   // if we're on the server, return default values
@@ -38,6 +37,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
 
     getCode: () => get().editor?.getValue() || "",
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setEditor: (editor: any) => {
       const savedCode = localStorage.getItem(`editor-code-${get().language}`);
       if (savedCode) editor.setValue(savedCode);

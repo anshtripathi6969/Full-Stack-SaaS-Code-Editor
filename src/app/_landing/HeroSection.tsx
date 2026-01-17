@@ -48,7 +48,7 @@ export default function HeroSection() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-light"
                 >
-                    The world's most advanced browser-based IDE. Built for speed, designed for pros, and powered by next-gen AI.
+                    The world&apos;s most advanced browser-based IDE. Built for speed, designed for pros, and powered by next-gen AI.
                 </motion.p>
 
                 {/* CTAs */}
@@ -100,7 +100,7 @@ export default function HeroSection() {
 
                     <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 min-h-[400px]">
                         <div className="font-mono text-sm space-y-1">
-                            <div className="flex gap-4"><span className="text-gray-600 select-none">1</span> <span className="text-purple-400">import</span> <span className="text-blue-400">React</span> <span className="text-purple-400">from</span> <span className="text-green-400">"react"</span>;</div>
+                            <div className="flex gap-4"><span className="text-gray-600 select-none">1</span> <span className="text-purple-400">import</span> <span className="text-blue-400">React</span> <span className="text-purple-400">from</span> <span className="text-green-400">&quot;react&quot;</span>;</div>
                             <div className="flex gap-4"><span className="text-gray-600 select-none">2</span> </div>
                             <div className="flex gap-4"><span className="text-gray-600 select-none">3</span> <span className="text-purple-400">export</span> <span className="text-purple-400">default</span> <span className="text-blue-400">function</span> <span className="text-yellow-400">App</span>() {"{"}</div>
                             <div className="flex gap-4"><span className="text-gray-600 select-none">4</span> <span className="pl-4 text-purple-400">return</span> (</div>

@@ -1,4 +1,3 @@
-import { Monaco } from "@monaco-editor/react";
 import { Id } from "../../convex/_generated/dataModel";
 
 export interface Theme {
@@ -44,9 +43,11 @@ export interface CodeEditorState {
   error: string | null;
   theme: string;
   fontSize: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   editor: any | null;
   executionResult: ExecutionResult | null;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setEditor: (editor: any) => void;
   getCode: () => string;
   setLanguage: (language: string) => void;

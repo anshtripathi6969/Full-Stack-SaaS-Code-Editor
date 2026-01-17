@@ -2,6 +2,7 @@
 
 import { useQuery } from "convex/react";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
 import SnippetLoadingSkeleton from "./_components/SnippetLoadingSkeleton";
@@ -31,10 +32,12 @@ function SnippetDetailPage() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
               <div className="flex items-center gap-4">
                 <div className="flex items-center justify-center size-12 rounded-xl bg-[#ffffff08] p-2.5">
-                  <img
+                  <Image
                     src={`/${snippet.language}.png`}
                     alt={`${snippet.language} logo`}
                     className="w-full h-full object-contain"
+                    width={32}
+                    height={32}
                   />
                 </div>
                 <div>

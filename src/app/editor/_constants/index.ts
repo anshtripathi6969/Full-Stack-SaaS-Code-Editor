@@ -1,4 +1,3 @@
-import { Monaco } from "@monaco-editor/react";
 import { Theme } from "../../../types";
 
 type LanguageConfig = Record<
@@ -420,6 +419,7 @@ export const THEME_DEFINITONS = {
 };
 
 // Helper function to define themes in Monaco
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const defineMonacoThemes = (monaco: any) => {
   Object.entries(THEME_DEFINITONS).forEach(([themeName, themeData]) => {
     monaco.editor.defineTheme(themeName, {

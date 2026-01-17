@@ -1,8 +1,10 @@
 import FeaturesSection from "./_landing/FeaturesSection";
+
+export const dynamic = "force-dynamic";
 import HeroSection from "./_landing/HeroSection";
 import LandingFooter from "./_landing/LandingFooter";
 import LandingNavigation from "./_landing/LandingNavigation";
-import StatsSection from "./_landing/StatsSection";
+import StatsSection from "./_landing/Stats";
 
 export default function LandingPage() {
     return (

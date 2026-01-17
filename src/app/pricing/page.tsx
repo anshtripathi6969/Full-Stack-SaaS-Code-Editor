@@ -12,6 +12,8 @@ import UpgradeButton from "./_components/UpgradeButton";
 import LoginButton from "@/components/LoginButton";
 
 
+export const dynamic = "force-dynamic";
+
 async function PricingPage() {
   const user = await currentUser();
   const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
@@ -126,11 +128,11 @@ async function PricingPage() {
                 {/* CTA */}
                 <div className="flex justify-center">
                   <SignedIn>
-                    <UpgradeButton/>
+                    <UpgradeButton />
                   </SignedIn>
 
                   <SignedOut>
-                    <LoginButton/>
+                    <LoginButton />
                   </SignedOut>
                 </div>
               </div>
