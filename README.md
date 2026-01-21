@@ -3,6 +3,7 @@
 <h1 align="center">✨ SaaS Code Editor — Next.js 15 IDE Platform ✨</h1>
 
 <div align="center">
+  <img width="1908" height="1079" alt="image" src="https://github.com/user-attachments/assets/ea71e49d-3932-4bda-b348-fdfd969c7be4" />
   <img src="https://github.com/user-attachments/assets/5db117a5-bf4e-4149-9817-1e7da06db7ec" width="100%" alt="SaaS IDE Screenshot 1" />
   <img src="https://github.com/user-attachments/assets/67119a06-3ca4-43b3-8dea-4eea6d71ddd6" width="100%" alt="SaaS IDE Screenshot 2" />
   <img src="https://github.com/user-attachments/assets/d77c6278-d91a-4cd2-ae18-78a18225d376" width="100%" alt="SaaS IDE Screenshot 3" />
