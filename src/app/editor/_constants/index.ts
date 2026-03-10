@@ -100,7 +100,7 @@ print(f"Sum of numbers: {numbers_sum}")`,
     logoPath: "/java.png",
     wandboxCompiler: "openjdk-jdk-22+36",
     monacoLanguage: "java",
-    defaultCode: `public class Main {
+    defaultCode: `class Main {
   public static void main(String[] args) {
       // Create array
       int[] numbers = {1, 2, 3, 4, 5};
