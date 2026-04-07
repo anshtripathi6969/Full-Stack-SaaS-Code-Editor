@@ -20,8 +20,36 @@
 }
 
 body {
-  background: linear-gradient(to bottom, #1a1a2e, #12121d);
+  background: radial-gradient(circle at 50% 0%, #1a1a2e 0%, #0a0a0f 100%);
   color: white;
   min-height: 100vh;
+}
+
+@utility glass-panel {
+  background: rgba(18, 18, 26, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@utility premium-border {
+  position: relative;
+  border-radius: 0.75rem;
+  background: rgba(18, 18, 26, 0.7);
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.1),
+      transparent 50%,
+      rgba(255, 255, 255, 0.05)
+    );
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
 }
  

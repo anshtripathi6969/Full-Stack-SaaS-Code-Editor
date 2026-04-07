@@ -1,123 +1,186 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { ArrowRight, Terminal, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
+import gsap from "gsap";
+
+const CODE_LINES = [
+  { num: 1, tokens: [{ text: "const", c: "text-purple-400" }, { text: " server", c: "text-blue-300" }, { text: " = ", c: "text-gray-500" }, { text: "require", c: "text-yellow-400" }, { text: "(", c: "text-gray-400" }, { text: "'express'", c: "text-emerald-400" }, { text: ")", c: "text-gray-400" }] },
+  { num: 2, tokens: [{ text: "const", c: "text-purple-400" }, { text: " app", c: "text-blue-300" }, { text: " = ", c: "text-gray-500" }, { text: "server", c: "text-yellow-400" }, { text: "()", c: "text-gray-400" }] },
+  { num: 3, tokens: [] },
+  { num: 4, tokens: [{ text: "app", c: "text-blue-300" }, { text: ".", c: "text-gray-500" }, { text: "get", c: "text-yellow-400" }, { text: "(", c: "text-gray-400" }, { text: "'/'", c: "text-emerald-400" }, { text: ", ", c: "text-gray-500" }, { text: "(req, res)", c: "text-orange-300" }, { text: " => {", c: "text-purple-400" }] },
+  { num: 5, tokens: [{ text: "  res", c: "text-blue-300" }, { text: ".", c: "text-gray-500" }, { text: "json", c: "text-yellow-400" }, { text: "({ ", c: "text-gray-400" }, { text: "status:", c: "text-red-300" }, { text: " 'blazing fast'", c: "text-emerald-400" }, { text: " })", c: "text-gray-400" }] },
+  { num: 6, tokens: [{ text: "})", c: "text-purple-400" }] },
+  { num: 7, tokens: [] },
+  { num: 8, tokens: [{ text: "app", c: "text-blue-300" }, { text: ".", c: "text-gray-500" }, { text: "listen", c: "text-yellow-400" }, { text: "(", c: "text-gray-400" }, { text: "3000", c: "text-orange-400" }, { text: ")", c: "text-gray-400" }] },
+];
 
 export default function HeroSection() {
-    return (
-        <section className="relative min-h-[90vh] flex flex-col justify-center items-center overflow-hidden px-4 md:px-0">
+  const sectionRef = useRef<HTMLElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const subRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const mockupRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
 
-            {/* Background Glows */}
-            <div className="absolute top-0 transform -translate-x-1/2 left-1/2 w-[1000px] h-[500px] bg-blue-500/20 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
-            <div className="absolute bottom-0 transform translate-x-1/2 right-1/2 w-[1000px] h-[500px] bg-purple-500/10 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-            {/* Hero Content */}
-            <div className="relative z-10 text-center max-w-5xl mx-auto space-y-8">
+      tl.from(badgeRef.current, { opacity: 0, y: 30, duration: 0.6 })
+        .from(headlineRef.current, { opacity: 0, y: 40, duration: 0.8 }, "-=0.3")
+        .from(subRef.current, { opacity: 0, y: 30, duration: 0.6 }, "-=0.4")
+        .from(ctaRef.current, { opacity: 0, y: 20, duration: 0.5 }, "-=0.3")
+        .from(mockupRef.current, {
+          opacity: 0,
+          y: 60,
+          scale: 0.95,
+          rotateX: 8,
+          duration: 1,
+          ease: "power2.out",
+        }, "-=0.3");
 
-                {/* Badge */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-4 hover:bg-white/10 transition-colors cursor-default"
-                >
-                    <Sparkles className="w-4 h-4 text-amber-400" />
-                    <span className="text-sm text-gray-300 font-medium">
-                        v2.0 is now live: Fast Remote Execution
-                    </span>
-                </motion.div>
+      // Blinking cursor animation
+      if (cursorRef.current) {
+        gsap.to(cursorRef.current, {
+          opacity: 0,
+          repeat: -1,
+          yoyo: true,
+          duration: 0.5,
+          ease: "power2.inOut",
+        });
+      }
+    }, sectionRef);
 
-                {/* Headline */}
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 }}
-                    className="text-6xl md:text-8xl font-bold tracking-tight text-white leading-tight"
-                >
-                    Code with{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 animate-gradient-x">
-                        Superpowers
-                    </span>
-                </motion.h1>
+    return () => ctx.revert();
+  }, []);
 
-                {/* Subheadline */}
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-light"
-                >
-                    The world&apos;s most advanced browser-based IDE. Built for speed, designed for pros, and powered by high-performance remote compilers.
-                </motion.p>
+  return (
+    <section
+      ref={sectionRef}
+      className="relative min-h-[95vh] flex flex-col justify-center items-center overflow-hidden px-4 md:px-0"
+    >
+      {/* Ambient Gradients */}
+      <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-blue-600/15 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[-100px] right-[-200px] w-[600px] h-[400px] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-[-200px] w-[400px] h-[400px] bg-cyan-500/5 blur-[100px] rounded-full pointer-events-none" />
 
-                {/* CTAs */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
-                >
-                    <Link
-                        href="/editor"
-                        className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl text-white font-semibold shadow-2xl shadow-blue-500/20 hover:shadow-blue-500/40 transition-all hover:scale-105 active:scale-95"
-                    >
-                        <span className="flex items-center gap-2 text-lg">
-                            Start Coding Now <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </span>
-                        <div className="absolute inset-0 rounded-xl ring-2 ring-white/20 group-hover:ring-white/40 transition-all" />
-                    </Link>
+      {/* Grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]" />
 
-                    <Link
-                        href="/pricing"
-                        className="px-8 py-4 bg-[#0a0a0f] border border-white/10 rounded-xl text-gray-300 font-medium hover:text-white hover:bg-white/5 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 text-lg"
-                    >
-                        View Pricing
-                    </Link>
-                </motion.div>
+      {/* Content */}
+      <div className="relative z-10 text-center max-w-5xl mx-auto space-y-8">
+        {/* Badge */}
+        <div
+          ref={badgeRef}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm cursor-default"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+          <span className="text-xs text-gray-400 font-medium tracking-wide uppercase">
+            v2.0 — Fast Remote Execution
+          </span>
+        </div>
+
+        {/* Headline */}
+        <h1
+          ref={headlineRef}
+          className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight text-white leading-[1.05]"
+        >
+          Code with{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
+            Superpowers
+          </span>
+        </h1>
+
+        {/* Subheadline */}
+        <p
+          ref={subRef}
+          className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto font-light leading-relaxed"
+        >
+          The world&apos;s most advanced browser-based IDE.
+          Built for speed, designed for pros, powered by high-performance remote compilers.
+        </p>
+
+        {/* CTAs */}
+        <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <Link
+            href="/editor"
+            className="group relative px-8 py-4 bg-white text-[#0a0a0f] rounded-2xl font-bold text-lg shadow-2xl shadow-white/10 hover:shadow-white/20 transition-all hover:scale-[1.03] active:scale-95"
+          >
+            <span className="flex items-center gap-2">
+              Start Coding
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </Link>
+
+          <Link
+            href="/snippets"
+            className="px-8 py-4 bg-white/[0.04] border border-white/10 rounded-2xl text-gray-300 font-medium hover:text-white hover:bg-white/[0.08] hover:border-white/20 transition-all text-lg"
+          >
+            View Snippets
+          </Link>
+        </div>
+      </div>
+
+      {/* IDE Mockup */}
+      <div
+        ref={mockupRef}
+        className="mt-20 mx-auto max-w-4xl w-full relative z-10"
+        style={{ perspective: "1200px" }}
+      >
+        <div className="relative rounded-2xl border border-white/[0.08] bg-[#0c0c14]/90 backdrop-blur-xl shadow-2xl shadow-black/40 overflow-hidden">
+          {/* Top bar */}
+          <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.04] bg-[#0c0c14]">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+              <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+              <div className="w-3 h-3 rounded-full bg-[#28c840]" />
             </div>
+            <div className="flex items-center gap-2 px-3 py-1 bg-white/[0.03] rounded-lg border border-white/5">
+              <span className="text-[10px] text-gray-500 font-mono">server.js</span>
+            </div>
+            <div className="w-16" />
+          </div>
 
-            {/* Floating UI Mockup */}
-            <motion.div
-                initial={{ opacity: 0, scale: 0.9, rotateX: 20 }}
-                animate={{ opacity: 1, scale: 1, rotateX: 0 }}
-                transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-                className="mt-20 mx-auto max-w-6xl w-full perspective-2000 relative z-10"
-                style={{ perspective: "1200px" }}
-            >
-                <div className="relative rounded-xl border border-white/10 bg-[#0a0a0f]/80 backdrop-blur-xl shadow-2xl shadow-blue-500/10 overflow-hidden transform rotate-x-6 hover:rotate-x-0 transition-transform duration-700">
-                    <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-[#1a1a2e]">
-                        <div className="flex gap-2">
-                            <div className="w-3 h-3 rounded-full bg-red-500/20" />
-                            <div className="w-3 h-3 rounded-full bg-yellow-500/20" />
-                            <div className="w-3 h-3 rounded-full bg-green-500/20" />
-                        </div>
-                        <div className="mx-auto flex items-center gap-2 px-3 py-1 bg-black/20 rounded-lg">
-                            <Terminal className="w-3 h-3 text-blue-400" />
-                            <span className="text-xs text-gray-400 font-mono">Run: main.tsx</span>
-                        </div>
-                    </div>
+          {/* Code area */}
+          <div className="p-6 font-mono text-sm leading-7">
+            {CODE_LINES.map((line) => (
+              <div key={line.num} className="flex">
+                <span className="w-8 text-right text-gray-700 select-none mr-6 text-xs leading-7">
+                  {line.num}
+                </span>
+                <span>
+                  {line.tokens.map((token, i) => (
+                    <span key={i} className={token.c}>
+                      {token.text}
+                    </span>
+                  ))}
+                  {line.num === 8 && (
+                    <span ref={cursorRef} className="inline-block w-[2px] h-4 bg-blue-400 ml-0.5 align-middle" />
+                  )}
+                </span>
+              </div>
+            ))}
+          </div>
 
-                    <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 min-h-[400px]">
-                        <div className="font-mono text-sm space-y-1">
-                            <div className="flex gap-4"><span className="text-gray-600 select-none">1</span> <span className="text-purple-400">import</span> <span className="text-blue-400">React</span> <span className="text-purple-400">from</span> <span className="text-green-400">&quot;react&quot;</span>;</div>
-                            <div className="flex gap-4"><span className="text-gray-600 select-none">2</span> </div>
-                            <div className="flex gap-4"><span className="text-gray-600 select-none">3</span> <span className="text-purple-400">export</span> <span className="text-purple-400">default</span> <span className="text-blue-400">function</span> <span className="text-yellow-400">App</span>() {"{"}</div>
-                            <div className="flex gap-4"><span className="text-gray-600 select-none">4</span> <span className="pl-4 text-purple-400">return</span> (</div>
-                            <div className="flex gap-4"><span className="text-gray-600 select-none">5</span> <span className="pl-8 text-blue-400">&lt;div&gt;</span>Hello World<span className="text-blue-400">&lt;/div&gt;</span></div>
-                            <div className="flex gap-4"><span className="text-gray-600 select-none">6</span> <span className="pl-4">);</span></div>
-                            <div className="flex gap-4"><span className="text-gray-600 select-none">7</span> {"}"}</div>
-                        </div>
+          {/* Bottom status bar */}
+          <div className="flex items-center justify-between px-5 py-2 border-t border-white/[0.04] bg-[#0c0c14]">
+            <div className="flex items-center gap-4">
+              <span className="text-[10px] text-gray-600">JavaScript</span>
+              <span className="text-[10px] text-gray-600">UTF-8</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span className="text-[10px] text-emerald-400/80">Ready</span>
+            </div>
+          </div>
+        </div>
 
-                        <div className="relative flex items-center justify-center bg-black/40 rounded-xl border border-white/5 border-dashed">
-                            <div className="text-center">
-                                <div className="w-16 h-16 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-xl mx-auto mb-4 animate-pulse shadow-lg shadow-blue-500/20" />
-                                <div className="text-sm text-gray-400 font-medium">Render Preview</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </motion.div>
-        </section>
-    );
+        {/* Glow under mockup */}
+        <div className="absolute -bottom-8 inset-x-8 h-16 bg-blue-500/10 blur-3xl rounded-full" />
+      </div>
+    </section>
+  );
 }

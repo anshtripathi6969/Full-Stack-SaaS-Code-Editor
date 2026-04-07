@@ -46,6 +46,9 @@ export interface CodeEditorState {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   editor: any | null;
   executionResult: ExecutionResult | null;
+  isShareDialogOpen: boolean;
+
+  setIsShareDialogOpen: (isOpen: boolean) => void;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setEditor: (editor: any) => void;

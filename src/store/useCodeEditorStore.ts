@@ -34,6 +34,9 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
     error: null,
     editor: null,
     executionResult: null,
+    isShareDialogOpen: false,
+
+    setIsShareDialogOpen: (isOpen: boolean) => set({ isShareDialogOpen: isOpen }),
 
     getCode: () => get().editor?.getValue() || "",
 

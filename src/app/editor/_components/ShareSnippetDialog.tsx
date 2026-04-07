@@ -2,7 +2,7 @@ import { useCodeEditorStore } from "@/store/useCodeEditorStore";
 import { useMutation } from "convex/react";
 import { useState } from "react";
 import { api } from "../../../../convex/_generated/api";
-import { X } from "lucide-react";
+import { X, Share2, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 function ShareSnippetDialog({ onClose }: { onClose: () => void }) {
@@ -20,11 +20,10 @@ function ShareSnippetDialog({ onClose }: { onClose: () => void }) {
       const code = getCode();
       await createSnippet({ title, language, code });
 
-      // ✅ Show toast *before* unmounting the dialog
       toast.success("Snippet shared successfully");
 
       setTitle("");
-      onClose(); // Close after toast shows
+      onClose();
     } catch (error) {
       console.log("Error creating snippet:", error);
       toast.error("Error creating snippet");
@@ -34,27 +33,40 @@ function ShareSnippetDialog({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-[#1e1e2e] rounded-lg p-6 w-full max-w-md">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold text-white">Share Snippet</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-300">
-            <X className="w-5 h-5" />
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="bg-[#0d0d14] rounded-2xl border border-white/[0.06] p-8 w-full max-w-md shadow-2xl relative overflow-hidden">
+        {/* Top gradient */}
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
+        
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/20">
+              <Share2 className="w-4 h-4 text-blue-400" />
+            </div>
+            <h2 className="text-lg font-semibold text-white">Share Snippet</h2>
+          </div>
+          <button 
+            onClick={onClose} 
+            className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-all"
+          >
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         <form onSubmit={handleShare}>
-          <div className="mb-4">
+          <div className="mb-6">
             <label htmlFor="title" className="block text-sm font-medium text-gray-400 mb-2">
-              Title
+              Snippet Title
             </label>
             <input
               type="text"
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-3 py-2 bg-[#181825] border border-[#313244] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter snippet title"
+              className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.06] rounded-xl text-white text-sm
+                focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500/30 transition-all
+                placeholder:text-gray-600"
+              placeholder="Give your snippet a name..."
               required
             />
           </div>
@@ -63,17 +75,25 @@ function ShareSnippetDialog({ onClose }: { onClose: () => void }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-gray-400 hover:text-gray-300"
+              className="px-4 py-2.5 text-sm text-gray-400 hover:text-white rounded-xl hover:bg-white/5 transition-all"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSharing}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 
-              disabled:opacity-50"
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-500/15 text-blue-400 border border-blue-500/20 
+                rounded-xl hover:bg-blue-500/25 hover:border-blue-500/30
+                disabled:opacity-50 transition-all text-sm font-semibold"
             >
-              {isSharing ? "Sharing..." : "Share"}
+              {isSharing ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Sharing...
+                </>
+              ) : (
+                "Share"
+              )}
             </button>
           </div>
         </form>
