@@ -24,7 +24,7 @@ export default function HeroSection() {
                 >
                     <Sparkles className="w-4 h-4 text-amber-400" />
                     <span className="text-sm text-gray-300 font-medium">
-                        v2.0 is now live: AI Code Completion
+                        v2.0 is now live: Fast Remote Execution
                     </span>
                 </motion.div>
 
@@ -48,7 +48,7 @@ export default function HeroSection() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-light"
                 >
-                    The world&apos;s most advanced browser-based IDE. Built for speed, designed for pros, and powered by next-gen AI.
+                    The world&apos;s most advanced browser-based IDE. Built for speed, designed for pros, and powered by high-performance remote compilers.
                 </motion.p>
 
                 {/* CTAs */}

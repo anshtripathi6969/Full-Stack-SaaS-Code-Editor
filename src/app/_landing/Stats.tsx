@@ -6,13 +6,13 @@ import { Code2, Globe, Users, Zap } from "lucide-react";
 const STATS = [
     {
         label: "Developers",
-        value: "10K+",
+        value: "100+",
         icon: Users,
         color: "from-blue-500 to-cyan-500",
     },
     {
         label: "Snippets Run",
-        value: "5M+",
+        value: "500+",
         icon: Code2,
         color: "from-purple-500 to-pink-500",
     },

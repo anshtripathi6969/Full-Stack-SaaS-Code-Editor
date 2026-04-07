@@ -33,7 +33,7 @@ function LandingNavigation() {
                                 AutoSyntax
                             </span>
                             <span className="block text-xs text-blue-400/60 font-medium">
-                                Cognitive Code Editor
+                                Advanced Code Editor
                             </span>
                         </div>
                     </Link>
@@ -45,20 +45,6 @@ function LandingNavigation() {
                         className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
                     >
                         Editor
-                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full" />
-                    </Link>
-                    <Link
-                        href="#features"
-                        className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
-                    >
-                        Features
-                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full" />
-                    </Link>
-                    <Link
-                        href="/pricing"
-                        className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
-                    >
-                        Pricing
                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full" />
                     </Link>
 

@@ -31,8 +31,8 @@ const features = [
     },
     {
         icon: Cpu,
-        title: "AI Code Autocompletion",
-        description: "Smart code suggestions powered by advanced LLMs to speed up your development.",
+        title: "Remote Cloud Execution",
+        description: "Compile and run your code instantly on our secure, lightning-fast cloud servers.",
         color: "from-emerald-500 to-green-500"
     },
     {
