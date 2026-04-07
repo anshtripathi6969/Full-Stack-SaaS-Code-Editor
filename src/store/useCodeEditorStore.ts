@@ -84,6 +84,15 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
 
       try {
         const compiler = LANGUAGE_CONFIG[language].wandboxCompiler;
+
+        // Preprocess Java code to remove 'public' from class declarations
+        // This is necessary because Wandbox uses a fixed filename (prog.java)
+        // and Java requires the filename to match the public class name.
+        let executionCode = code;
+        if (language === "java") {
+          executionCode = code.replace(/^\s*public\s+class\b/gm, "class");
+        }
+
         const response = await fetch("https://wandbox.org/api/compile.json", {
           method: "POST",
           headers: {
@@ -91,7 +100,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
           },
           body: JSON.stringify({
             compiler: compiler,
-            code: code,
+            code: executionCode,
           }),
         });
 
